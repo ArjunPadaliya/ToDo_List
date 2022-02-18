@@ -1,13 +1,14 @@
 <h1>My to do list</h1>
 
 <table>
+  <a href="{% url 'task-create' %}">Create Task</a>
   <tr>
     <th>Items</th>
   </tr>
   {% for task in tasks %}
     <tr>
         <th>{{task.title}}</th>
-        <th><a href = "{% url 'task_detail' task.id %}">View</a></th>
+        <th><a href = "{% url 'task-detail' task.id %}">View</a></th>
     </tr>
   {% empty %}
       <h3> No Items Found </h3>
