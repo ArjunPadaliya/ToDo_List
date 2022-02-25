@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView, LogoutView
 from .models import Task
 from django.urls import reverse_lazy
 
@@ -29,3 +30,14 @@ class TaskDelete(DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('task-list')
+
+class CustomLoginView(LoginView):
+    template_name = 'base/login.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy('task-list')
+
+class CustomLogoutView(LogoutView):
+    next_page='task-list'
